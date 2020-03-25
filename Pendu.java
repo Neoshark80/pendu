@@ -8,34 +8,31 @@ public class Pendu {
 	public static listeMots listeMots;
 
 	public static void pendu() {
-		int vieRestante = 7, verificationIndex, variableRigolote = 0, nbrLettreDuMot, lettreDejaTestÈInt;
-		// Ma variableRigolote sert ‡ dÈfinir quand le joueur a gagnÈ
-		char play = 'o', lettreAConvertir, obelix, lettreATester, lettreATesterTLC, soloBoyChar, soloBoyCharTLC;
-		String lettreATestÈeSTR, motATrouver, soloBoyStr, saisiUtilisateur, motATrouver1;
+		int vieRestante = 7, verificationIndex, variableRigolote = 0, nbrLettreDuMot, lettreDejaTest√©Int;
+		// Ma variableRigolote sert √† d√©finir quand le joueur a gagn√©
+		char play = 'o', lettreAConvertir, obelix, lettreATester, soloBoyChar;
+		String lettreATest√©eSTR, motATrouver, saisiUtilisateur;
 		boolean areYouNoob, uneSeuleLettreFausse = false;
-		StringBuilder lettreTestÈeSB = new StringBuilder();
+		StringBuilder lettreTest√©eSB = new StringBuilder();
 		Scanner sc = new Scanner(System.in);
 		listeMots = new listeMots();
 		while (play == 'o') {
 			do {
 				System.out.println("Avez-vous un ami pour jouer avec vous ? (O/N)");
-				soloBoyStr = sc.nextLine();
-				soloBoyCharTLC = soloBoyStr.charAt(0);
-				soloBoyChar = Character.toLowerCase(soloBoyCharTLC);
+				soloBoyChar = convertisseurCharToLowerCase(sc);
 			} while (soloBoyChar != 'o' && soloBoyChar != 'n');
 			do {
 				if (soloBoyChar == 'n')
 					motATrouver = listeMots.get();
 				else {
-					System.out.println("Demandez ‡ votre ami de taper un mot que vous devrez trouver");
-					motATrouver1 = sc.nextLine();
-					motATrouver = motATrouver1.substring(0).toLowerCase();
+					System.out.println("Demandez √† votre ami de taper un mot que vous devrez trouver");
+					motATrouver = convertisseurStrToLowerCase(sc);
 					for (int j = 0; j < 500; j++)
 						System.out.println();
 				}
 				nbrLettreDuMot = motATrouver.length();
 				StringBuilder motVisible = new StringBuilder(nbrLettreDuMot);
-				for (int i = 0; i < motATrouver.length(); i++) { // crÈation d'une copie du mot ‡ trouver sous forme
+				for (int i = 0; i < motATrouver.length(); i++) { // cr√©ation d'une copie du mot √† trouver sous forme
 																	// d'asterix
 					lettreAConvertir = motATrouver.charAt(i);
 					obelix = convertirLettreEtoile(lettreAConvertir);
@@ -46,35 +43,34 @@ public class Pendu {
 					do { // protection contre la perte de points en cas d'utilisation de
 							// chiffres/symboles
 						System.out.println("Veuillez choisir une lettre:");
-						saisiUtilisateur = sc.next();
+						saisiUtilisateur = convertisseurStrToLowerCase(sc);
 						while (saisiUtilisateur.length() > 1) {
 							System.out.println(
-									"Veuillez ne saisir qu'une seule lettre ‡ la fois.\n Merci de retaper une lettre");
-							saisiUtilisateur = sc.next();
+									"Veuillez ne saisir qu'une seule lettre √† la fois.\n Merci de retaper une lettre");
+							saisiUtilisateur = convertisseurStrToLowerCase(sc);
 						}
-						lettreATesterTLC = saisiUtilisateur.charAt(0);
-						lettreATester = Character.toLowerCase(lettreATesterTLC);
+						lettreATester = saisiUtilisateur.charAt(0);
 						areYouNoob = youRnoob(lettreATester);
-					} while (areYouNoob != false); // empËche le joueur d'utiliser d'autres caractËre que des lettres
+					} while (areYouNoob != false); // emp√®che le joueur d'utiliser d'autres caract√®re que des lettres
 					verificationIndex = motATrouver.indexOf(lettreATester);
-					if (verificationIndex == -1) { // cas de rÈponse fausse
-						lettreATestÈeSTR = String.valueOf(lettreATester);
-						lettreDejaTestÈInt = lettreTestÈeSB.indexOf(lettreATestÈeSTR);
-						if (lettreDejaTestÈInt != -1) {
-							System.out.println("Vous avez dÈj‡ du remarquer que cette lettre n'est pas bonne ;)");
+					if (verificationIndex == -1) { // cas de r√©ponse fausse
+						lettreATest√©eSTR = String.valueOf(lettreATester);
+						lettreDejaTest√©Int = lettreTest√©eSB.indexOf(lettreATest√©eSTR);
+						if (lettreDejaTest√©Int != -1) {
+							System.out.println("Vous avez d√©j√† du remarquer que cette lettre n'est pas bonne ;)");
 						} else {
 							if (vieRestante == 7) {
 								vieRestante -= 1;
 								uneSeuleLettreFausse = true;
 								progression(motVisible, vieRestante);
-								System.out.println("La lettre " + lettreATester + " n'est pas dans le mot ‡ trouver");
-								lettreTestÈeSB.append(lettreATester + "; ");
+								System.out.println("La lettre " + lettreATester + " n'est pas dans le mot √† trouver");
+								lettreTest√©eSB.append(lettreATester + "; ");
 							} else {
-								lettreDejaTeste(lettreTestÈeSB, uneSeuleLettreFausse);
+								lettreDejaTeste(lettreTest√©eSB, uneSeuleLettreFausse);
 							}
 						}
 
-					} else { // cas de bonne rÈponse
+					} else { // cas de bonne r√©ponse
 						do {
 							variableRigolote += 1;
 							motVisible.deleteCharAt(verificationIndex);
@@ -84,7 +80,7 @@ public class Pendu {
 						{
 							progression(motVisible, vieRestante);
 							if (vieRestante != 7) {
-								lettreDejaTeste(lettreTestÈeSB, uneSeuleLettreFausse);
+								lettreDejaTeste(lettreTest√©eSB, uneSeuleLettreFausse);
 							}
 
 						}
@@ -92,22 +88,27 @@ public class Pendu {
 				}
 
 			} while (variableRigolote != nbrLettreDuMot && vieRestante != 0);
-			if (variableRigolote == nbrLettreDuMot) {
+			if (variableRigolote == nbrLettreDuMot && soloBoyChar == 'n') {
 				variableRigolote = 0;
-				System.out.println("Bravo, vous avez gagnÈ!!");
-				play = retry(sc);
+				System.out.println("Bravo, vous avez gagn√©!!");
+				play = convertisseurCharToLowerCase(sc);
+			} else {
+				variableRigolote = 0;
+				System.out.println("Bravo, vous avez gagn√©!!\n Mais votre ami a perdu.");
+				play = convertisseurCharToLowerCase(sc);
 			}
 			if (vieRestante == 0) {
 				vieRestante = 7;
-				System.out.println("Quel dommage, c'est un cuisant Èchec !!");
-				play = retry(sc);
+				System.out.println("Quel dommage, c'est un cuisant √©chec !!");
+				play = convertisseurCharToLowerCase(sc);
 			}
 
 		}
 		while (play != 'o' && play != 'n')
-			play = retry(sc);
+			play = convertisseurCharToLowerCase(sc);
 		if (play == 'n') {
 			System.out.println("Au revoir");
+
 		}
 	}
 
@@ -126,32 +127,32 @@ public class Pendu {
 		}
 	}
 
-	private static void lettreDejaTeste(StringBuilder lettreTestÈToAddSB, boolean uneLettrefausse) {
+	private static void lettreDejaTeste(StringBuilder lettreTest√©ToAddSB, boolean uneLettrefausse) {
 		if (uneLettrefausse == false) {
-			System.out.println("Vous avez dÈj‡ testÈ les lettres: " + lettreTestÈToAddSB
-					+ " qui ne sont pas dans le mot ‡ trouver");
+			System.out.println("Vous avez d√©j√† test√© les lettres: " + lettreTest√©ToAddSB
+					+ " qui ne sont pas dans le mot √† trouver");
 		} else {
-			System.out.println("La lettre: " + lettreTestÈToAddSB + " n'est pas dans le mot ‡ trouver");
+			System.out.println("La lettre: " + lettreTest√©ToAddSB + " n'est pas dans le mot √† trouver");
 		}
 
+	}
+
+	private static String convertisseurStrToLowerCase(Scanner sc) {
+		String toLowerCase = sc.next();
+		String strLowerCase = toLowerCase.substring(0).toLowerCase();
+		return strLowerCase;
+	}
+
+	private static char convertisseurCharToLowerCase(Scanner sc) {
+		String toLowerCase = sc.next();
+		String strLowerCase = toLowerCase.substring(0).toLowerCase();
+		char charLowerCase = strLowerCase.charAt(0);
+		return charLowerCase;
 	}
 
 	private static void progression(StringBuilder motVisibleSB, int vieRestanteP) {
 		System.out.println(
 				"Progression actuelle:\n" + motVisibleSB + "\n\n Il vous reste: " + vieRestanteP + " tentatives\n");
-	}
-
-	private static char retry(Scanner sc) {
-		char reessayer = ' ', reessayerSC = ' ';
-		String retry = null;
-		if (reessayerSC != 'o' && reessayerSC != 'n') {
-			System.out.println("Voulez-vous rÈ-essayer ? (O/N)");
-			sc.next();
-			retry = sc.next();
-			reessayer = retry.charAt(0);
-			reessayerSC = Character.toLowerCase(reessayer);
-		}
-		return reessayerSC;
 	}
 
 	private static char convertirLettreEtoile(char lettreAConvertir) {
@@ -263,7 +264,7 @@ public class Pendu {
 			lettreEnAsterixC = lettreEnAsterixS.charAt(0);
 			break;
 		default:
-			System.out.println("Merci d'utiliser des caractËres de l'alphabet latin");
+			System.out.println("Merci d'utiliser des caract√®res de l'alphabet latin");
 		}
 		return lettreEnAsterixC;
 	}
