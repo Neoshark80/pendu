@@ -64,8 +64,10 @@ public class Pendu {
 								uneSeuleLettreFausse = true;
 								progression(motVisible, vieRestante);
 								System.out.println("La lettre " + lettreATester + " n'est pas dans le mot à trouver");
-								lettreTestéeSB.append(lettreATester + "; ");
+								lettreTestéeSB.append(lettreATester + ", ");
 							} else {
+								uneSeuleLettreFausse = false;
+								lettreTestéeSB.append(lettreATester + ", ");
 								lettreDejaTeste(lettreTestéeSB, uneSeuleLettreFausse);
 							}
 						}
@@ -130,9 +132,10 @@ public class Pendu {
 	private static void lettreDejaTeste(StringBuilder lettreTestéToAddSB, boolean uneLettrefausse) {
 		if (uneLettrefausse == false) {
 			System.out.println("Vous avez déjà testé les lettres: " + lettreTestéToAddSB
-					+ " qui ne sont pas dans le mot à trouver");
+					+ "qui ne sont pas dans le mot à trouver");
 		} else {
 			System.out.println("La lettre: " + lettreTestéToAddSB + " n'est pas dans le mot à trouver");
+
 		}
 
 	}
