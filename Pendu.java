@@ -68,7 +68,7 @@ public class Pendu {
 							} else {
 								vieRestante -= 1;
 								uneSeuleLettreFausse = false;
-								lettreTestéeSB.append(lettreATester + ", ");								
+								lettreTestéeSB.append(lettreATester + ", ");
 								progression(motVisible, vieRestante);
 								lettreDejaTeste(lettreTestéeSB, uneSeuleLettreFausse);
 								System.out.println("Oui");
@@ -97,7 +97,8 @@ public class Pendu {
 				variableRigolote = 0;
 				System.out.println("Bravo, vous avez gagné!!");
 				play = convertisseurCharToLowerCase(sc);
-			} else {
+			}
+			if (variableRigolote == nbrLettreDuMot && soloBoyChar == 'o') {
 				variableRigolote = 0;
 				System.out.println("Bravo, vous avez gagné!!\n Mais votre ami a perdu.");
 				play = convertisseurCharToLowerCase(sc);
