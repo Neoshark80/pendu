@@ -66,9 +66,12 @@ public class Pendu {
 								System.out.println("La lettre " + lettreATester + " n'est pas dans le mot à trouver");
 								lettreTestéeSB.append(lettreATester + ", ");
 							} else {
+								vieRestante -= 1;
 								uneSeuleLettreFausse = false;
-								lettreTestéeSB.append(lettreATester + ", ");
+								lettreTestéeSB.append(lettreATester + ", ");								
+								progression(motVisible, vieRestante);
 								lettreDejaTeste(lettreTestéeSB, uneSeuleLettreFausse);
+								System.out.println("Oui");
 							}
 						}
 
