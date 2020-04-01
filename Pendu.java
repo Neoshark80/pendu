@@ -71,7 +71,6 @@ public class Pendu {
 								lettreTestéeSB.append(lettreATester + ", ");
 								progression(motVisible, vieRestante);
 								lettreDejaTeste(lettreTestéeSB, uneSeuleLettreFausse);
-								System.out.println("Oui");
 							}
 						}
 
